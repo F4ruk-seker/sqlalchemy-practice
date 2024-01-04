@@ -94,22 +94,22 @@ def add_user():
 
 
 def answer_questions():
-        user_id = input('customer id (int) : ')
-        for question in session.query(CustomerSurveyQuestions).all():
-            print(f"Soru: {question.question}")
-            answer_text = input("Cevabınız: ")
+    user_id = input('customer id (int) : ')
+    for question in session.query(CustomerSurveyQuestions).all():
+        print(f"Soru: {question.question}")
+        answer_text = input("Cevabınız: ")
 
-            answer = CustomerSurveyAnswers(answer=answer_text, question=question)
-            session.add(answer)
-            session.commit()
+        answer = CustomerSurveyAnswers(answer=answer_text, question=question)
+        session.add(answer)
+        session.commit()
 
-            survey_collector = SurveyCollector(
-                customer_id=user_id,
-                survey_question_id=question.id,
-                survey_answers_id=answer.id
-            )
-            session.add(survey_collector)
-            session.commit()
+        survey_collector = SurveyCollector(
+            customer_id=user_id,
+            survey_question_id=question.id,
+            survey_answers_id=answer.id
+        )
+        session.add(survey_collector)
+        session.commit()
 
 
 try:
