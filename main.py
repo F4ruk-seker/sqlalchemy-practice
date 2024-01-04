@@ -61,7 +61,7 @@ class CustomerSurveyAnswers(Base):
 class SurveyCollector(Base):
     __tablename__ = 'survey_collector'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    customer_id = Column(Integer, ForeignKey('customer_info.id'))  # Buraya doğru ForeignKey tanımını ekleyin
+    customer_id = Column(Integer, ForeignKey('customer_info.id'))
     survey_question_id = Column(Integer, ForeignKey('customer_survey_questions.id'))
     survey_answers_id = Column(Integer, ForeignKey('customer_survey_answers.id'))
 
@@ -99,16 +99,14 @@ def answer_questions():
             print(f"Soru: {question.question}")
             answer_text = input("Cevabınız: ")
 
-            # Yeni cevap oluşturun ve kaydedin
             answer = CustomerSurveyAnswers(answer=answer_text, question=question)
             session.add(answer)
             session.commit()
 
-            # Anket bilgilerini toplandığı tabloya ekleyin
             survey_collector = SurveyCollector(
                 customer_id=user_id,
                 survey_question_id=question.id,
-                survey_answers_id=answer.id  # Burada answer.id'yi kullanamazsınız
+                survey_answers_id=answer.id
             )
             session.add(survey_collector)
             session.commit()
