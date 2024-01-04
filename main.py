@@ -115,12 +115,12 @@ def answer_questions():
 try:
     while True:
         select = input("""
-        1. Write DB
-        2. Create Questions
-        2. Answer Questions
-        4. Add New User
-        5.E Exit
-        >>> : """)
+1. Write DB
+2. Create Questions
+2. Answer Questions
+4. Add New User
+5.E Exit
+>>> : """)
         if select == '1':
             write_database()
         elif select == '2':
